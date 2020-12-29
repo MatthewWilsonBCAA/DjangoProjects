@@ -1,0 +1,12 @@
+body {
+  margin: 0 auto;
+  max-width: 60%;
+}
+
+header,
+h1,
+a {
+  font-family: monospace;
+
+  color: #225;
+}
