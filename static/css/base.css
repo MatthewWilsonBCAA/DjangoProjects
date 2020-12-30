@@ -1,12 +1,14 @@
 body {
+  padding-top: 2em;
   margin: 0 auto;
   max-width: 60%;
+  font-family: monospace;
+  font-size: 1.6em;
+  line-height: 1.4em;
 }
 
 header,
 h1,
 a {
-  font-family: monospace;
-
   color: #225;
 }
