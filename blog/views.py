@@ -1,7 +1,7 @@
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from .models import Post
+from .models import Post, Comment
 
 
 # Create your views here.
@@ -15,6 +15,17 @@ class BlogListView(ListView):
 class BlogDetailView(DetailView):
     model = Post
     template_name = "post_detail.html"
+
+
+class MakeCommentView(CreateView):
+    model = Comment
+    template_name = "comment_new.html"
+    fields = ["comment", "post"]
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        form.instance.author = self.request.path
+        return super().form_valid(form)
 
 
 class BlogCreateView(CreateView):

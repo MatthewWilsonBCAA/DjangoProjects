@@ -6,4 +6,8 @@
 </div>
 <a href="{% url 'post_edit' post.pk %}">+ Edit Post</a>
 <a href="{% url 'post_delete' post.pk %}">+ Delete Blog Post</a>
-{% endblock content %}
+{% for comment in post.comments.all %}
+<h3>{{ comment.author }}</h3>
+<p>{{ comment }}</p>
+{% endfor %}
+<a href="{{ request.path }}comment">+ New Comment</a>{% endblock content %}
