@@ -1,6 +1,6 @@
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, resolve
 from .models import Post, Comment
 
 
@@ -20,11 +20,11 @@ class BlogDetailView(DetailView):
 class MakeCommentView(CreateView):
     model = Comment
     template_name = "comment_new.html"
-    fields = ["comment", "post"]
+    fields = ["comment"]
 
     def form_valid(self, form):
         form.instance.author = self.request.user
-        form.instance.author = self.request.path
+        form.instance.post_id = self.request.resolver_match.kwargs["pk"]
         return super().form_valid(form)
 
 
