@@ -37,7 +37,8 @@ h3 {
   font-size: 0.8em;
 }
 .post-entry {
-  border-color: black;
+  border-color: #225;
   border-style: dotted;
-  border-radius: 15px;
+  border-radius: 5px;
+  padding: 0.3em;
 }

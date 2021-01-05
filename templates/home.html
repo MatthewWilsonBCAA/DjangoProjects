@@ -2,5 +2,8 @@
 <div class="post-entry">
   <h2><a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></h2>
   <h3>by {{ post.author.username }}</h3>
+  {% if post.author.username == "KaijZenal" %}
+  <h3>(Owner)</h3>
+  {% endif %}
 </div>
 {% endfor %} {% endblock content %}

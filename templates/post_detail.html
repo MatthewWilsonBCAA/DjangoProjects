@@ -2,6 +2,9 @@
 <div class="post-entry">
   <h2>{{ post.title }}</h2>
   <h3>{{ post.author.username }}</h3>
+  {% if post.author.username == "KaijZenal" %}
+  <h3>(Owner)</h3>
+  {% endif %}
   <p>{{ post.body }}</p>
   <p>Votes: {{ post.votes.count }}</p>
 
@@ -18,6 +21,9 @@
 {% for comment in post.comments.all %}
 <div class="post-entry">
   <h3>{{ comment.author }}</h3>
+  {% if comment.author.username == "KaijZenal" %}
+  <h3>(Owner)</h3>
+  {% endif %}
   <p>{{ comment }}</p>
 </div>
 
