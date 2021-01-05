@@ -1,6 +1,7 @@
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy, resolve
+from django.db.models import Count
 from .models import Post, Comment, Vote
 
 
@@ -10,6 +11,13 @@ from .models import Post, Comment, Vote
 class BlogListView(ListView):
     model = Post
     template_name = "home.html"
+
+    paginate_by = 25
+
+    def get_queryset(self):
+        return (
+            Post.objects.all().annotate(num_votes=Count("votes")).order_by("-num_votes")
+        )
 
 
 class BlogDetailView(DetailView):

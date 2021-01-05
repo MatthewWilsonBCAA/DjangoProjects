@@ -1,10 +1,19 @@
 body {
   padding-top: 2em;
   margin: 0 auto;
-  max-width: 60%;
   font-family: monospace;
   font-size: 1.6em;
   line-height: 1.4em;
+}
+@media only screen and (max-width: 600px) {
+  body {
+    max-width: 90%;
+  }
+}
+@media only screen and (min-width: 601px) {
+  body {
+    max-width: 50%;
+  }
 }
 
 p {
@@ -17,6 +26,12 @@ h2,
 h3,
 a {
   color: #225;
+}
+h1 {
+  font-size: 1.3em;
+}
+h2 {
+  font-size: 1em;
 }
 h3 {
   font-size: 0.8em;
