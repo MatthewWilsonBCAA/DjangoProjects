@@ -4,7 +4,12 @@
 # # Register your models here.
 # admin.site.register(Post)
 from django.contrib import admin
-from .models import Post, Comment
+from .models import Post, Comment, Vote
+
+
+class VoteDisplay(admin.StackedInline):
+    model = Vote
+    extra = 0
 
 
 class CommentInLine(admin.StackedInline):
@@ -15,8 +20,10 @@ class CommentInLine(admin.StackedInline):
 class PostAdmin(admin.ModelAdmin):
     inlines = [
         CommentInLine,
+        VoteDisplay,
     ]
 
 
 admin.site.register(Post, PostAdmin)
 admin.site.register(Comment)
+admin.site.register(Vote)

@@ -6,6 +6,7 @@ from .views import (
     BlogUpdateView,
     BlogDeleteView,
     MakeCommentView,
+    MakeVoteView,
 )
 
 urlpatterns = [
@@ -14,5 +15,6 @@ urlpatterns = [
     path("post/new/", BlogCreateView.as_view(), name="post_new"),
     path("post/<int:pk>/", BlogDetailView.as_view(), name="post_detail"),
     path("post/<int:pk>/comment", MakeCommentView.as_view(), name="comment_new"),
+    path("post/<int:pk>/vote", MakeVoteView.as_view(), name="post_vote"),
     path("", BlogListView.as_view(), name="home"),
 ]

@@ -34,3 +34,15 @@ class Comment(models.Model):
 
     def get_absolute_url(self):
         return reverse("post_detail", args=[str(self.post.id)])
+
+
+class Vote(models.Model):
+    post = models.ForeignKey(
+        Post,
+        on_delete=models.CASCADE,
+        related_name="votes",
+    )
+    author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+
+    def get_absolute_url(self):
+        return reverse("post_detail", args=[str(self.post.id)])
