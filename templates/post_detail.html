@@ -16,7 +16,10 @@
 <a href="{% url 'post_edit' post.pk %}">+ Edit Post</a>
 <a href="{% url 'post_delete' post.pk %}">+ Delete Post</a>
 {% for comment in post.comments.all %}
-<h3>{{ comment.author }}</h3>
-<p>{{ comment }}</p>
+<div class="post-entry">
+  <h3>{{ comment.author }}</h3>
+  <p>{{ comment }}</p>
+</div>
+
 {% endfor %}
 <a href="{{ request.path }}comment">+ New Comment</a>{% endblock content %}

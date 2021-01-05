@@ -36,3 +36,8 @@ h2 {
 h3 {
   font-size: 0.8em;
 }
+.post-entry {
+  border-color: black;
+  border-style: dotted;
+  border-radius: 15px;
+}
