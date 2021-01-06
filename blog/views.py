@@ -26,7 +26,7 @@ class UserPostsView(ListView):
     template_name = "user_posts.html"
     slug_field = "username"
     slug_url_kwarg = "username"
-    context_object_name = "user"
+    context_object_name = "currently_viewing_user"
 
     def get_queryset(self):
         cur_user = self.request.resolver_match.kwargs["username"]
@@ -38,7 +38,7 @@ class UserProfileView(DetailView):
     template_name = "user_profile.html"
     slug_field = "username"
     slug_url_kwarg = "username"
-    context_object_name = "user"
+    context_object_name = "currently_viewing_user"
 
 
 class BlogDetailView(DetailView):

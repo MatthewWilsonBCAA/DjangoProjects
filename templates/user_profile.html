@@ -1,6 +1,12 @@
 {% extends 'base.html' %} {% block content %}
-<h1>{{ user.username }}</h1>
-<p>{{ user.bio }}</p>
+<h1>{{ currently_viewing_user.username }}</h1>
+<p>{{ currently_viewing_user.bio }}</p>
+{% if user == currently_viewing_user %}
 <a href="{% url 'edit_bio' %}">Edit Bio</a>
-<h3><a href="{% url 'user_posts' user.username %}">User's Posts</a></h3>
+{% endif %}
+<h3>
+  <a href="{% url 'user_posts' currently_viewing_user.username %}"
+    >User's Posts</a
+  >
+</h3>
 {% endblock content %}
