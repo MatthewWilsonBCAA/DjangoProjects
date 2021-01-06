@@ -1,18 +1,24 @@
-body {
-  padding-top: 2em;
-  margin: 0 auto;
-  font-family: monospace;
-  font-size: 1.6em;
-  line-height: 1.4em;
-}
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 900px) {
   body {
-    max-width: 90%;
+    background-color: white;
+    width: 100%;
+    padding-top: 2em;
+
+    font-family: monospace;
+    font-size: 1.6em;
+    line-height: 1.4em;
   }
 }
-@media only screen and (min-width: 601px) {
+@media only screen and (min-width: 901px) {
   body {
+    background-color: white;
     max-width: 50%;
+    margin: 0 auto;
+    padding-top: 2em;
+
+    font-family: monospace;
+    font-size: 1.6em;
+    line-height: 1.4em;
   }
 }
 
@@ -28,10 +34,10 @@ a {
   color: #225;
 }
 h1 {
-  font-size: 1.3em;
+  font-size: 2em;
 }
 h2 {
-  font-size: 1em;
+  font-size: 1.5em;
 }
 h3 {
   font-size: 0.8em;
@@ -40,5 +46,5 @@ h3 {
   border-color: #225;
   border-style: dotted;
   border-radius: 5px;
-  padding: 0.3em;
+  padding: 0.2em;
 }

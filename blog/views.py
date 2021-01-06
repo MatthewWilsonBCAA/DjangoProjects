@@ -3,6 +3,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy, resolve
 from django.db.models import Count
 from .models import Post, Comment, Vote
+from accounts.models import CustomUser
 
 
 # Create your views here.
@@ -18,6 +19,26 @@ class BlogListView(ListView):
         return (
             Post.objects.all().annotate(num_votes=Count("votes")).order_by("-num_votes")
         )
+
+
+class UserPostsView(ListView):
+    model = CustomUser
+    template_name = "user_posts.html"
+    slug_field = "username"
+    slug_url_kwarg = "username"
+    context_object_name = "user"
+
+    def get_queryset(self):
+        cur_user = self.request.resolver_match.kwargs["username"]
+        return Post.objects.filter(author__username=cur_user)
+
+
+class UserProfileView(DetailView):
+    model = CustomUser
+    template_name = "user_profile.html"
+    slug_field = "username"
+    slug_url_kwarg = "username"
+    context_object_name = "user"
 
 
 class BlogDetailView(DetailView):

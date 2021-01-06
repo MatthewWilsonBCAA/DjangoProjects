@@ -7,6 +7,8 @@ from .views import (
     BlogDeleteView,
     MakeCommentView,
     MakeVoteView,
+    UserProfileView,
+    UserPostsView,
 )
 
 urlpatterns = [
@@ -16,5 +18,15 @@ urlpatterns = [
     path("post/<int:pk>/", BlogDetailView.as_view(), name="post_detail"),
     path("post/<int:pk>/comment", MakeCommentView.as_view(), name="comment_new"),
     path("post/<int:pk>/vote", MakeVoteView.as_view(), name="post_vote"),
+    path(
+        "user/<str:username>/",
+        UserProfileView.as_view(),
+        name="user_profile",
+    ),
+    path(
+        "user/<str:username>/posts",
+        UserPostsView.as_view(),
+        name="user_posts",
+    ),
     path("", BlogListView.as_view(), name="home"),
 ]
