@@ -9,6 +9,7 @@ from .views import (
     MakeVoteView,
     UserProfileView,
     UserPostsView,
+    UpdateBioView,
 )
 
 urlpatterns = [
@@ -27,6 +28,11 @@ urlpatterns = [
         "user/<str:username>/posts",
         UserPostsView.as_view(),
         name="user_posts",
+    ),
+    path(
+        "user/edit-bio",
+        UpdateBioView.as_view(),
+        name="edit_bio",
     ),
     path("", BlogListView.as_view(), name="home"),
 ]

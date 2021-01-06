@@ -98,3 +98,15 @@ class BlogDeleteView(DeleteView):
     model = Post
     template_name = "post_delete.html"
     success_url = reverse_lazy("home")
+
+
+class UpdateBioView(UpdateView):
+    model = CustomUser
+    template_name = "bio_edit.html"
+    fields = ["bio"]
+    # success_url = reverse_lazy("")
+    def get_success_url(self):
+        return self.request.user.username
+
+    def get_object(self):
+        return self.request.user
