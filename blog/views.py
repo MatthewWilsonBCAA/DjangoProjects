@@ -35,7 +35,7 @@ class BlogListView(ListView):
         #   return by_new()
         sort_by_n = self.request.resolver_match.kwargs["sort_by"]
         if sort_by_n == "new":
-            return Post.objects.all().order_by("created")
+            return Post.objects.all().order_by("-created")
         else:
             return (
                 Post.objects.all()
