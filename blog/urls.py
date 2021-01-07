@@ -34,5 +34,5 @@ urlpatterns = [
         UpdateBioView.as_view(),
         name="edit_bio",
     ),
-    path("", BlogListView.as_view(), name="home"),
+    path("<str:sort_by>/", BlogListView.as_view(), name="home"),
 ]

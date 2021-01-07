@@ -4,6 +4,7 @@ from django.urls import reverse_lazy, resolve
 from django.db.models import Count
 from .models import Post, Comment, Vote
 from accounts.models import CustomUser
+import datetime
 
 
 # Create your views here.
@@ -12,13 +13,27 @@ from accounts.models import CustomUser
 class BlogListView(ListView):
     model = Post
     template_name = "home.html"
-
-    paginate_by = 25
+    slug_field = "sort_by"
+    slug_url_kwarg = "sort_by"
+    context_object_name = "sort_by"
+    # paginate_by = 25
 
     def get_queryset(self):
-        return (
-            Post.objects.all().annotate(num_votes=Count("votes")).order_by("-num_votes")
-        )
+        # if query_param == top:
+        #   return by_top()
+        # elif query_param == hot:
+        #   return by_hot()
+        # else:
+        #   return by_new()
+        sort_by_n = self.request.resolver_match.kwargs["sort_by"]
+        if sort_by_n == "new":
+            return Post.objects.all().order_by("created")
+        else:
+            return (
+                Post.objects.all()
+                .annotate(num_votes=Count("votes"))
+                .order_by("-num_votes")
+            )
 
 
 class UserPostsView(ListView):
@@ -85,6 +100,7 @@ class BlogCreateView(CreateView):
 
     def form_valid(self, form):
         form.instance.author = self.request.user
+        form.instance.created = datetime.datetime.now()
         return super().form_valid(form)
 
 
@@ -103,7 +119,7 @@ class BlogDeleteView(DeleteView):
 class UpdateBioView(UpdateView):
     model = CustomUser
     template_name = "bio_edit.html"
-    fields = ["bio"]
+    fields = ["profile_picture_link", "bio"]
     # success_url = reverse_lazy("")
     def get_success_url(self):
         return self.request.user.username

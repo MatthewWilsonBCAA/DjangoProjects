@@ -5,6 +5,10 @@
   <br />
   {% if user.is_authenticated %}
   <br />
+  <p>
+    Note: This site does not currently support uploading local files. You must
+    provide the URL to your image.
+  </p>
   {{ form.as_p }}
   <input type="submit" value="Update" />
   {% else %}

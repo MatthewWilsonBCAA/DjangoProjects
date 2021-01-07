@@ -33,6 +33,9 @@ h3,
 a {
   color: #225;
 }
+a {
+  background: bisque;
+}
 h1 {
   font-size: 2em;
 }
@@ -47,4 +50,15 @@ h3 {
   border-style: dotted;
   border-radius: 5px;
   padding: 0.2em;
+  background: bisque;
+}
+
+img {
+  padding: 0.1em;
+  max-width: 10%;
+}
+
+.full-image {
+  padding: 0.5em;
+  max-width: 50%;
 }

@@ -12,6 +12,7 @@ class Post(models.Model):
         on_delete=models.CASCADE,
     )
     body = models.TextField()
+    created = models.DateTimeField(default="2021-01-06 06:00:00.000000-08:00")
 
     def __str__(self):
         return self.title

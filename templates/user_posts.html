@@ -3,6 +3,10 @@
   <h2><a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></h2>
   <h3>
     by
+    <img
+      src="{{ post.author.profile_picture_link }}"
+      alt="No Profile Picture"
+    />
     <a href="{% url 'user_profile' post.author.username %}"
       >{{ post.author.username }}</a
     >

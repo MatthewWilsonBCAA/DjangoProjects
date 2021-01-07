@@ -3,6 +3,10 @@
   <h2>{{ post.title }}</h2>
   <h3>
     by
+    <img
+      src="{{ post.author.profile_picture_link }}"
+      alt="No Profile Picture"
+    />
     <a href="{% url 'user_profile' post.author.username %}"
       >{{ post.author.username }}</a
     >
@@ -10,6 +14,7 @@
   {% if post.author.username == "KaijZenal" %}
   <h3>(Owner)</h3>
   {% endif %}
+  <p>{{ post.created }}</p>
   <p>{{ post.body }}</p>
   <p>Votes: {{ post.votes.count }}</p>
 
@@ -26,6 +31,10 @@
 {% for comment in post.comments.all %}
 <div class="post-entry">
   <h3>
+    <img
+      src="{{ comment.author.profile_picture_link }}"
+      alt="No Profile Picture"
+    />
     <a href="{% url 'user_profile' post.author.username %}"
       >{{ comment.author.username }}</a
     >

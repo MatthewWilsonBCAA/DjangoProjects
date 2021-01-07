@@ -1,4 +1,9 @@
 {% extends 'base.html' %} {% block content %}
+<img
+  class="full-image"
+  src="{{ currently_viewing_user.profile_picture_link }}"
+  alt="No Profile Picture"
+/>
 <h1>{{ currently_viewing_user.username }}</h1>
 <p>{{ currently_viewing_user.bio }}</p>
 {% if user == currently_viewing_user %}
