@@ -20,12 +20,16 @@
         </p>
         <div class="post-entry">
           <a href="{% url 'post_new' %}">New Post</a>
+          <br />
           <a href="{% url 'logout' %}">Log Out</a>
+          <br />
+          <a href="{% url 'user_list' %}">View User List</a>
         </div>
         {% else %}
         <div class="post-entry">
           <p>You are not logged in.</p>
           <a href="{% url 'login' %}">Log In</a>
+          <br />
           <a href="{% url 'signup' %}">or Sign Up</a>
         </div>
 

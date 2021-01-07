@@ -1,0 +1,12 @@
+{% extends 'base.html' %} {% block content %} {% if user.is_authenticated %}
+<br />
+{% for user in object_list %}
+
+<h2>
+  <img src="{{ user.profile_picture_link }}" alt="No Profile Picture" />
+  <a href="{% url 'user_profile' user.username %}">{{ user.username }}</a>
+</h2>
+<br />
+{% endfor %} {% else %}
+<p>You are not logged in.</p>
+{% endif %} {% endblock content %}

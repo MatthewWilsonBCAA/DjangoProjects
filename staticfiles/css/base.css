@@ -54,11 +54,11 @@ h3 {
 }
 
 img {
-  padding: 0.1em;
-  max-width: 10%;
+  vertical-align: middle;
+  width: 50px;
+  border-radius: 50%;
 }
 
 .full-image {
-  padding: 0.5em;
-  max-width: 50%;
+  width: 50%;
 }

@@ -13,6 +13,11 @@ class GettingStartedView(ListView):
     template_name = "start.html"
 
 
+class UserListView(ListView):
+    model = CustomUser
+    template_name = "user_list.html"
+
+
 class BlogListView(ListView):
     model = Post
     template_name = "home.html"
