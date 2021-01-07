@@ -1,4 +1,4 @@
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, View
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy, resolve
 from django.db.models import Count
@@ -8,6 +8,9 @@ import datetime
 
 
 # Create your views here.
+class GettingStartedView(ListView):
+    model = Post
+    template_name = "start.html"
 
 
 class BlogListView(ListView):

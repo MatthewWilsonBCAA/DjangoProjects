@@ -1,0 +1,9 @@
+{% extends 'base.html' %} {% block content %}
+<p>
+  Welcome to the site! This is a forum for posting whatever content you wish,
+  along as it is SFW. To create a new account, click "Sign Up" above. Already
+  have on? Click "Log In" above. Click
+  <a href="{% url 'home' 'top' %}">here</a> to start browsing the content on the
+  site!
+</p>
+{% endblock content %}

@@ -10,6 +10,7 @@ from .views import (
     UserProfileView,
     UserPostsView,
     UpdateBioView,
+    GettingStartedView,
 )
 
 urlpatterns = [
@@ -35,4 +36,5 @@ urlpatterns = [
         name="edit_bio",
     ),
     path("<str:sort_by>/", BlogListView.as_view(), name="home"),
+    path("", GettingStartedView.as_view(), name="start"),
 ]
