@@ -9,9 +9,10 @@
 {% if user == currently_viewing_user %}
 <a href="{% url 'edit_bio' %}">Edit Bio</a>
 {% endif %}
-<h3>
+<h2>Total Votes: {{ currently_viewing_user.total_votes }}</h2>
+<h2>
   <a href="{% url 'user_posts' currently_viewing_user.username %}"
     >User's Posts</a
   >
-</h3>
+</h2>
 {% endblock content %}

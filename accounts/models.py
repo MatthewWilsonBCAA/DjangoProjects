@@ -1,5 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.apps import apps
+
 
 # Create your models here.
 class CustomUser(AbstractUser):
@@ -9,3 +11,7 @@ class CustomUser(AbstractUser):
         max_length=250,
         default="https://upload.wikimedia.org/wikipedia/en/1/1b/NPC_wojak_meme.png",
     )
+
+    def total_votes(self):
+        Vote = apps.get_model("blog", "Vote")
+        return Vote.objects.filter(post__author__username=self.username).count()
