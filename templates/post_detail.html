@@ -35,7 +35,7 @@
       src="{{ comment.author.profile_picture_link }}"
       alt="No Profile Picture"
     />
-    <a href="{% url 'user_profile' post.author.username %}"
+    <a href="{% url 'user_profile' comment.author.username %}"
       >{{ comment.author.username }}</a
     >
   </h3>

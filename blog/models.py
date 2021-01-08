@@ -47,3 +47,12 @@ class Vote(models.Model):
 
     def get_absolute_url(self):
         return reverse("post_detail", args=[str(self.post.id)])
+
+
+class Follow(models.Model):
+    follower = models.ForeignKey(
+        get_user_model(), on_delete=models.CASCADE, related_name="follower"
+    )
+    leader = models.ForeignKey(
+        get_user_model(), on_delete=models.CASCADE, related_name="leader"
+    )
