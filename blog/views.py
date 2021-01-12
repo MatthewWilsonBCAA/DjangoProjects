@@ -18,6 +18,16 @@ class UserListView(ListView):
     template_name = "user_list.html"
 
 
+class ShowLeaderPosts(ListView):
+    model = Post
+    template_name = "following.html"
+
+    def get_queryset(self):
+        return Post.objects.filter(
+            author__follows__follower__username=self.request.user.username
+        )
+
+
 class BlogListView(ListView):
     model = Post
     template_name = "home.html"
