@@ -4,8 +4,10 @@
   {% csrf_token %}
   <br />
   {% if user.username == post.author.username and user.is_authenticated %}
-  <br />
-  {{ form.as_p }}
+  <h3>Title:</h3>
+  <p>{{ form.title }} {{ form.title.errors }}</p>
+  <h3>Body:</h3>
+  <p>{{ form.body }} {{ form.body.errors }}</p>
   <input type="submit" value="Update" />
   {% else %}
   <p>You are not logged in, or you do not own this post</p>
