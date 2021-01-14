@@ -18,43 +18,38 @@ class UserListView(ListView):
     template_name = "user_list.html"
 
 
-class ShowLeaderPosts(ListView):
+class OrderingByQueryParams:
+    def get_ordering(self):
+        sort_by_n = self.request.GET.get("sortby")
+        print(sort_by_n)
+        if sort_by_n == "top":
+            return "-num_votes"
+        else:
+            return "-created"
+
+
+class ShowLeaderPosts(OrderingByQueryParams, ListView):
     model = Post
     template_name = "following.html"
 
     def get_queryset(self):
-        return Post.objects.filter(
-            author__follows__follower__username=self.request.user.username
+        return Post.objects.filter(author__followers=self.request.user).order_by(
+            "-created"
         )
 
 
-class BlogListView(ListView):
-    model = Post
+class BlogListView(OrderingByQueryParams, ListView):
+    queryset = Post.objects.all().annotate(num_votes=Count("votes"))
     template_name = "home.html"
-    slug_field = "sort_by"
-    slug_url_kwarg = "sort_by"
-    context_object_name = "sort_by"
+    # slug_field = "sort_by"
+    # slug_url_kwarg = "sort_by"
+    # context_object_name = "sortby"
     # paginate_by = 25
 
-    def get_queryset(self):
-        # if query_param == top:
-        #   return by_top()
-        # elif query_param == hot:
-        #   return by_hot()
-        # else:
-        #   return by_new()
-        sort_by_n = self.request.resolver_match.kwargs["sort_by"]
-        if sort_by_n == "new":
-            return Post.objects.all().order_by("-created")
-        else:
-            return (
-                Post.objects.all()
-                .annotate(num_votes=Count("votes"))
-                .order_by("-num_votes")
-            )
+    # return Post.objects.all().
 
 
-class UserPostsView(ListView):
+class UserPostsView(OrderingByQueryParams, ListView):
     model = CustomUser
     template_name = "user_posts.html"
     slug_field = "username"
@@ -144,3 +139,22 @@ class UpdateBioView(UpdateView):
 
     def get_object(self):
         return self.request.user
+
+
+class FollowUser(UpdateView):
+    model = CustomUser
+    fields = []
+    slug_field = "username"
+    slug_url_kwarg = "username"
+    context_object_name = "currently_viewing_user"
+    success_url = reverse_lazy("home")
+
+    def form_valid(self, form):
+
+        cur_username = self.request.resolver_match.kwargs["username"]
+        cur_user = CustomUser.objects.get(username=cur_username)
+        self.request.user.leaders.add(cur_user)
+        # act_user = CustomUser.objects.get(username=self.request.user.username)
+        # cur_user.followers.add()
+
+        return super().form_valid(form)

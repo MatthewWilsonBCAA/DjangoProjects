@@ -10,6 +10,15 @@
 <a href="{% url 'edit_bio' %}">Edit Bio</a>
 {% endif %}
 <h2>Total Votes: {{ currently_viewing_user.total_votes }}</h2>
+<h2>Followers: {{ currently_viewing_user.total_followers }}</h2>
+<form
+  action="{% url 'user_follow' currently_viewing_user.username %}"
+  method="post"
+>
+  {% csrf_token %} {{ form.as_p }} {% if user != currently_viewing_user %}
+  <input class="buttonclass" type="submit" value="Follow" />
+  {% endif %}
+</form>
 <h2>
   <a href="{% url 'user_posts' currently_viewing_user.username %}"
     >User's Posts</a

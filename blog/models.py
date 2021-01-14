@@ -12,7 +12,7 @@ class Post(models.Model):
         on_delete=models.CASCADE,
     )
     body = models.TextField()
-    created = models.DateTimeField(default="2021-01-06 06:00:00.000000-08:00")
+    created = models.DateTimeField(null=True)
 
     def __str__(self):
         return self.title
@@ -49,10 +49,10 @@ class Vote(models.Model):
         return reverse("post_detail", args=[str(self.post.id)])
 
 
-class Follow(models.Model):
-    follower = models.ForeignKey(
-        get_user_model(), on_delete=models.CASCADE, related_name="follower"
-    )
-    leader = models.ForeignKey(
-        get_user_model(), on_delete=models.CASCADE, related_name="leader"
-    )
+# class Follow(models.Model):
+#     follower = models.ForeignKey(
+#         get_user_model(), on_delete=models.CASCADE, related_name="follower"
+#     )
+#     leader = models.ForeignKey(
+#         get_user_model(), on_delete=models.CASCADE, related_name="leader"
+#     )

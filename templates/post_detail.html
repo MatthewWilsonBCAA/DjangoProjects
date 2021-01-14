@@ -20,7 +20,7 @@
 
   <form action="{% url 'post_vote' post.pk %}" method="post">
     {% if not user_has_voted %} {% csrf_token %} {{ form.as_p }}
-    <input type="submit" value="Vote" />
+    <input class="buttonclass" type="submit" value="Vote" />
     {% else %}
     <p>You are not logged in, or you have already voted</p>
     {% endif %}

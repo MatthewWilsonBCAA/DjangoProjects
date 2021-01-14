@@ -1,8 +1,9 @@
 {% extends 'base.html' %} {% block content %}
 <h1>New Comment</h1>
 <form action="" method="post">
-  {% if user.is_authenticated %} {% csrf_token %} {{ form.as_p }}
-  <input type="submit" value="Comment" />
+  {% if user.is_authenticated %} {% csrf_token %}
+  <p>{{ form.comment }} {{ form.comment.errors }}</p>
+  <input class="buttonclass" type="submit" value="Comment" />
   {% else %}
   <p>You must be logged in to make comments</p>
   {% endif %}

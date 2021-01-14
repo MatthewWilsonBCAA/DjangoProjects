@@ -6,7 +6,7 @@
   {% if user.username == post.author.username and user.is_authenticated %}
   <br />
   <p>Are you sure you want to delete "{{ post.title }}"?</p>
-  <input type="submit" value="Confirm" />
+  <input class="buttonclass" type="submit" value="Confirm" />
   {% else %}
   <p>You are not logged in, or you do not own this post</p>
   {% endif %}

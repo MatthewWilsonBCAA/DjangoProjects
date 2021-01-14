@@ -1,8 +1,8 @@
 {% extends 'base.html' %} {% block content %}
 <div class="post-entry">
-  <a href="{% url 'home' 'top' %}">Sort By Top Posts</a>
+  <a href="{% url 'home' %}?sortby=top">Sort By Top Posts</a>
   <br />
-  <a href="{% url 'home' 'new' %}">Sort By New Posts</a>
+  <a href="{% url 'home' %}?sortby=new">Sort By New Posts</a>
 </div>
 
 {% for post in object_list %}

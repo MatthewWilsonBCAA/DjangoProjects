@@ -12,4 +12,10 @@ class CustomUserAdmin(UserAdmin):
     model = CustomUser
 
 
+UserAdmin.fieldsets += (
+    (
+        "Custom fields set",
+        {"fields": ("bio", "age", "profile_picture_link", "followers")},
+    ),
+)
 admin.site.register(CustomUser, CustomUserAdmin)

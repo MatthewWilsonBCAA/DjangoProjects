@@ -13,6 +13,7 @@ from .views import (
     GettingStartedView,
     UserListView,
     ShowLeaderPosts,
+    FollowUser,
 )
 
 urlpatterns = [
@@ -32,13 +33,14 @@ urlpatterns = [
         UserPostsView.as_view(),
         name="user_posts",
     ),
+    path("user/<str:username>/follow", FollowUser.as_view(), name="user_follow"),
     path(
         "user/edit-bio",
         UpdateBioView.as_view(),
         name="edit_bio",
     ),
-    path("list/", UserListView.as_view(), name="user_list"),
-    path("<str:sort_by>/", BlogListView.as_view(), name="home"),
+    # path("list/", UserListView.as_view(), name="user_list"),
     path("following/", ShowLeaderPosts.as_view(), name="following"),
-    path("", GettingStartedView.as_view(), name="start"),
+    path("", BlogListView.as_view(), name="home"),
+    # path("", GettingStartedView.as_view(), name="start"),
 ]

@@ -135,6 +135,6 @@ STATIC_URL = "/static/"
 STATICFILES_DIRS = [str(BASE_DIR.joinpath("static"))]
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-LOGIN_REDIRECT_URL = "/top"
-LOGOUT_REDIRECT_URL = "/top"
+LOGIN_REDIRECT_URL = "/?sortby=top"
+LOGOUT_REDIRECT_URL = "/?sortby=top"
 AUTH_USER_MODEL = "accounts.CustomUser"

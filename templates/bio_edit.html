@@ -5,12 +5,15 @@
   <br />
   {% if user.is_authenticated %}
   <br />
-  <p>
+  <h3>
     Note: This site does not currently support uploading local files. You must
     provide the URL to your image.
-  </p>
-  {{ form.as_p }}
-  <input type="submit" value="Update" />
+  </h3>
+  <p>{{ form.profile_picture_link }} {{ form.profile_picture_link.errors }}</p>
+  <h3>Your Biography</h3>
+  <p>{{ form.bio }} {{ form.bio.errors }}</p>
+
+  <input class="buttonclass" type="submit" value="Update" />
   {% else %}
   <p>You are not logged in</p>
   {% endif %}

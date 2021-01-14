@@ -9,7 +9,9 @@
     <div>
       <header>
         <div class="nav-left">
-          <h1><a href="{% url 'home' 'top' %}">Base Camp Forum</a></h1>
+          <h1>
+            <a href="{% url 'home' %}?sortby=top">Base Camp Forum</a>
+          </h1>
         </div>
         {% if user.is_authenticated %}
         <p>
@@ -23,7 +25,7 @@
           <br />
           <a href="{% url 'logout' %}">Log Out</a>
           <br />
-          <a href="{% url 'user_list' %}">View User List</a>
+          <a href="{% url 'following' %}">Feed</a>
         </div>
         {% else %}
         <div class="post-entry">
@@ -36,7 +38,7 @@
         {% endif %}
       </header>
       {% block content %} {% endblock content %}
-      <p>v0.3-d26</p>
+      <p>v0.4-d27</p>
     </div>
   </body>
 </html>
