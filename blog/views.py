@@ -21,6 +21,19 @@ class UserListView(ListView):
 class OrderingByQueryParams:
     def get_ordering(self):
         sort_by_n = self.request.GET.get("sortby")
+        sk = list(sort_by_n)
+        seen = []
+        result = []
+        for i in sk:
+            if i == "t" or i == "o" or i == "p" or i == "n" or i == "e" or i == "w":
+                if "".join(result) == "new" or "".join(result) == "top":
+                    break
+                if not i in seen:
+                    seen.append(i)
+                    result.append(i)
+                    continue
+        sort_by_n = "".join(result)
+        # sort_by_n = sort_by_n.strip("/?page= ")
         print(sort_by_n)
         if sort_by_n == "top":
             return "-num_votes"
@@ -44,9 +57,25 @@ class BlogListView(OrderingByQueryParams, ListView):
     # slug_field = "sort_by"
     # slug_url_kwarg = "sort_by"
     # context_object_name = "sortby"
-    # paginate_by = 25
+    paginate_by = 10
 
-    # return Post.objects.all().
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        sort_by_n = self.request.GET.get("sortby")
+        sk = list(sort_by_n)
+        seen = []
+        result = []
+        for i in sk:
+            if i == "t" or i == "o" or i == "p" or i == "n" or i == "e" or i == "w":
+                if "".join(result) == "new" or "".join(result) == "top":
+                    break
+                if not i in seen:
+                    seen.append(i)
+                    result.append(i)
+                    continue
+        sort_by_n = "".join(result)
+        context["cursort"] = sort_by_n
+        return context
 
 
 class UserPostsView(OrderingByQueryParams, ListView):

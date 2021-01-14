@@ -10,7 +10,7 @@
       <header>
         <div class="nav-left">
           <h1>
-            <a href="{% url 'home' %}?sortby=top">Base Camp Forum</a>
+            <a href="{% url 'home' %}?sortby=new">Base Camp Forum</a>
           </h1>
         </div>
         {% if user.is_authenticated %}
@@ -38,7 +38,7 @@
         {% endif %}
       </header>
       {% block content %} {% endblock content %}
-      <p>v0.4-d27</p>
+      <p>v0.4-d28</p>
     </div>
   </body>
 </html>
