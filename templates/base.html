@@ -1,7 +1,9 @@
+<!DOCTYPE html>
 {% load static %}
-<html>
+<html lang="en">
   <head>
     <title>Base Forum</title>
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{% static 'css/base.css' %}" />
   </head>
@@ -12,6 +14,9 @@
           <h1>
             <a href="{% url 'home' %}?sortby=new">Base Camp Forum</a>
           </h1>
+          <h2>
+            <a href="{% url 'search' %}?q=">Search</a>
+          </h2>
         </div>
         {% if user.is_authenticated %}
         <p>
@@ -38,7 +43,7 @@
         {% endif %}
       </header>
       {% block content %} {% endblock content %}
-      <p>v0.4-d28</p>
+      <p>v0.5-d30</p>
     </div>
   </body>
 </html>

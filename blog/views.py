@@ -1,7 +1,7 @@
 from django.views.generic import ListView, DetailView, View
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy, resolve
-from django.db.models import Count
+from django.db.models import Count, Q
 from .models import Post, Comment, Vote
 from accounts.models import CustomUser
 import datetime
@@ -22,18 +22,14 @@ class OrderingByQueryParams:
     def get_ordering(self):
         sort_by_n = self.request.GET.get("sortby")
         try:
-            sk = list(sort_by_n)
-            seen = []
             result = []
+            sk = list(sort_by_n)
             for i in sk:
-                if i == "t" or i == "o" or i == "p" or i == "n" or i == "e" or i == "w":
-                    if "".join(result) == "new" or "".join(result) == "top":
-                        break
-                    if not i in seen:
-                        seen.append(i)
-                        result.append(i)
-                        continue
+                if i == "&":
+                    break
+                result.append(i)
             sort_by_n = "".join(result)
+
         except:
             sort_by_n = "new"
         if sort_by_n == "top":
@@ -52,6 +48,22 @@ class ShowLeaderPosts(OrderingByQueryParams, ListView):
         )
 
 
+class SearchView(OrderingByQueryParams, ListView):
+    model = Post
+    template_name = "search.html"
+
+    def get_queryset(self):
+        query = self.request.GET.get("q")  # tag__icontains=
+        if not query:
+            query = " "
+        object_list = Post.objects.filter(
+            Q(tag__icontains=query)
+            | Q(title__icontains=query)
+            | Q(body__icontains=query)
+        )
+        return object_list
+
+
 class BlogListView(OrderingByQueryParams, ListView):
     queryset = Post.objects.all().annotate(num_votes=Count("votes"))
     template_name = "home.html"
@@ -64,21 +76,18 @@ class BlogListView(OrderingByQueryParams, ListView):
         context = super().get_context_data(**kwargs)
         sort_by_n = self.request.GET.get("sortby")
         try:
-            sk = list(sort_by_n)
-            seen = []
             result = []
+            sk = list(sort_by_n)
             for i in sk:
-                if i == "t" or i == "o" or i == "p" or i == "n" or i == "e" or i == "w":
-                    if "".join(result) == "new" or "".join(result) == "top":
-                        break
-                    if not i in seen:
-                        seen.append(i)
-                        result.append(i)
-                        continue
+                if i == "&":
+                    break
+                result.append(i)
             sort_by_n = "".join(result)
             context["cursort"] = sort_by_n
         except:
-            context["corsort"] = "new"
+            context["cursort"] = "new"
+        if not context["cursort"]:
+            context["cursort"] = "new"
         return context
 
 
@@ -142,7 +151,7 @@ class MakeCommentView(CreateView):
 class BlogCreateView(CreateView):
     model = Post
     template_name = "post_new.html"
-    fields = ["title", "body"]
+    fields = ["title", "body", "tag"]
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -153,7 +162,7 @@ class BlogCreateView(CreateView):
 class BlogUpdateView(UpdateView):
     model = Post
     template_name = "post_edit.html"
-    fields = ["title", "body"]
+    fields = ["title", "body", "tag"]
 
 
 class BlogDeleteView(DeleteView):

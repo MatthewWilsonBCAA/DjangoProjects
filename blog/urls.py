@@ -14,6 +14,7 @@ from .views import (
     UserListView,
     ShowLeaderPosts,
     FollowUser,
+    SearchView,
 )
 
 urlpatterns = [
@@ -41,6 +42,7 @@ urlpatterns = [
     ),
     # path("list/", UserListView.as_view(), name="user_list"),
     path("following/", ShowLeaderPosts.as_view(), name="following"),
+    path("search/", SearchView.as_view(), name="search"),
     path("", BlogListView.as_view(), name="home"),
     # path("", GettingStartedView.as_view(), name="start"),
 ]

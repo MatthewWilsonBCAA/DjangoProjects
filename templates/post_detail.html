@@ -16,6 +16,7 @@
   {% endif %}
   <p>{{ post.created }}</p>
   <p>{{ post.body }}</p>
+  <p>Tag: {{ post.tag }}</p>
   <p>Votes: {{ post.votes.count }}</p>
 
   <form action="{% url 'post_vote' post.pk %}" method="post">
