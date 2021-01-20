@@ -34,7 +34,7 @@ a {
   color: #225;
 }
 a {
-  background: bisque;
+  background: #e8e1d4;
 }
 h1 {
   font-size: 2em;
@@ -50,7 +50,7 @@ h3 {
   border-style: dotted;
   border-radius: 5px;
   padding: 0.2em;
-  background: bisque;
+  background: #e8e1d4;
 }
 
 img {
@@ -66,6 +66,13 @@ img {
 }
 button,
 .buttonclass {
+  background-color: #779796;
+  color: #e8e1d4;
+  padding: 10px 20px;
+  text-align: center;
+  border-radius: 25%;
+}
+.inputfield {
   background-color: #225;
   color: white;
   padding: 10px 20px;

@@ -16,7 +16,11 @@ class Post(models.Model):
     tag = models.CharField(max_length=20, null=True)
 
     def __str__(self):
-        return self.title
+        shortened = self.body[:50]
+        if len(shortened) > 49:
+            return shortened + " (click title to continue reading)"
+        else:
+            return shortened + " (this is it)"
 
     def get_absolute_url(self):
         return reverse("post_detail", args=[str(self.id)])

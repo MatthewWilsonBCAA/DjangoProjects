@@ -1,7 +1,8 @@
 {% extends 'base.html' %} {% block content %}
 <div class="post-entry">
+  <p>Include !tag! or !title! to search by those parameters only</p>
   <form action="" method="get">
-    <input style="color: #223" name="q" type="text" placeholder="Search..." />
+    <input class="inputfield" name="q" type="text" placeholder="Search..." />
   </form>
 </div>
 
@@ -21,6 +22,7 @@
   {% if post.author.username == "KaijZenal" %}
   <h3>(Owner)</h3>
   {% endif %}
+  <p>{{ post }}</p>
   <p>Votes: {{ post.votes.count }}</p>
 </div>
 {% endfor %} {% if is_paginated %}

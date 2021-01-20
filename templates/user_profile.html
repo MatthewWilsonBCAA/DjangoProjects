@@ -1,27 +1,30 @@
 {% extends 'base.html' %} {% block content %}
-<img
-  class="full-image"
-  src="{{ currently_viewing_user.profile_picture_link }}"
-  alt="No Profile Picture"
-/>
-<h1>{{ currently_viewing_user.username }}</h1>
-<p>{{ currently_viewing_user.bio }}</p>
-{% if user == currently_viewing_user %}
-<a href="{% url 'edit_bio' %}">Edit Bio</a>
-{% endif %}
-<h2>Total Votes: {{ currently_viewing_user.total_votes }}</h2>
-<h2>Followers: {{ currently_viewing_user.total_followers }}</h2>
-<form
-  action="{% url 'user_follow' currently_viewing_user.username %}"
-  method="post"
->
-  {% csrf_token %} {{ form.as_p }} {% if user != currently_viewing_user %}
-  <input class="buttonclass" type="submit" value="Follow" />
+<div class="post-entry">
+  <img
+    class="full-image"
+    src="{{ currently_viewing_user.profile_picture_link }}"
+    alt="No Profile Picture"
+  />
+  <h1>{{ currently_viewing_user.username }}</h1>
+  <p>{{ currently_viewing_user.bio }}</p>
+  {% if user == currently_viewing_user %}
+  <a href="{% url 'edit_bio' %}">Edit Bio</a>
   {% endif %}
-</form>
-<h2>
-  <a href="{% url 'user_posts' currently_viewing_user.username %}"
-    >User's Posts</a
+  <h2>Total Votes: {{ currently_viewing_user.total_votes }}</h2>
+  <h2>Followers: {{ currently_viewing_user.total_followers }}</h2>
+  <form
+    action="{% url 'user_follow' currently_viewing_user.username %}"
+    method="post"
   >
-</h2>
+    {% csrf_token %} {{ form.as_p }} {% if user != currently_viewing_user %}
+    <input class="buttonclass" type="submit" value="Follow" />
+    {% endif %}
+  </form>
+  <h2>
+    <a href="{% url 'user_posts' currently_viewing_user.username %}"
+      >User's Posts</a
+    >
+  </h2>
+</div>
+
 {% endblock content %}

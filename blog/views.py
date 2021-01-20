@@ -54,13 +54,21 @@ class SearchView(OrderingByQueryParams, ListView):
 
     def get_queryset(self):
         query = self.request.GET.get("q")  # tag__icontains=
+
         if not query:
             query = " "
-        object_list = Post.objects.filter(
-            Q(tag__icontains=query)
-            | Q(title__icontains=query)
-            | Q(body__icontains=query)
-        )
+        if "!tag!" in query:
+            query = query.replace("!tag!", "")
+            object_list = Post.objects.filter(Q(tag__icontains=query))
+        elif "!title!" in query:
+            query = query.replace("!title!", "")
+            object_list = Post.objects.filter(Q(title__icontains=query))
+        else:
+            object_list = Post.objects.filter(
+                Q(tag__icontains=query)
+                | Q(title__icontains=query)
+                | Q(body__icontains=query)
+            )
         return object_list
 
 

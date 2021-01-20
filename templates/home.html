@@ -21,24 +21,27 @@
   {% if post.author.username == "KaijZenal" %}
   <h3>(Owner)</h3>
   {% endif %}
+  <p>{{ post }}</p>
   <p>Votes: {{ post.votes.count }}</p>
 </div>
 {% endfor %} {% if is_paginated %}
 <div class="pagination">
   <span class="page-links">
-    {% if page_obj.has_previous %}
-    <a href="/?sortby={{ cursort }}&page={{ page_obj.previous_page_number }}"
-      >Previous</a
-    >
-    {% endif %}
-    <span class="page-current">
-      Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-    </span>
-    {% if page_obj.has_next %}
-    <a href="/?sortby={{ cursort }}&page={{ page_obj.next_page_number }}"
-      >Next</a
-    >
-    {% endif %}
+    <div class="post-entry">
+      {% if page_obj.has_previous %}
+      <a href="/?sortby={{ cursort }}&page={{ page_obj.previous_page_number }}"
+        >Previous</a
+      >
+      {% endif %}
+      <span class="page-current">
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+      </span>
+      {% if page_obj.has_next %}
+      <a href="/?sortby={{ cursort }}&page={{ page_obj.next_page_number }}"
+        >Next</a
+      >
+      {% endif %}
+    </div>
   </span>
 </div>
 {% endif %} {% endblock content %}

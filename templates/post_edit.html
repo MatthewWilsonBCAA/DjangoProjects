@@ -1,18 +1,21 @@
 {% extends 'base.html' %} {% block content %}
-<h1>Edit Post</h1>
-<form action="" method="post">
-  {% csrf_token %}
-  <br />
-  {% if user.username == post.author.username and user.is_authenticated %}
-  <h3>Title:</h3>
-  <p>{{ form.title }} {{ form.title.errors }}</p>
-  <h3>Body:</h3>
-  <p>{{ form.body }} {{ form.body.errors }}</p>
-  <h3>Tag:</h3>
-  <p>{{ form.tag }} {{ form.tag.errors }}</p>
-  <input class="buttonclass" type="submit" value="Update" />
-  {% else %}
-  <p>You are not logged in, or you do not own this post</p>
-  {% endif %}
-</form>
+<div class="post-entry">
+  <h1>Edit Post</h1>
+  <form action="" method="post">
+    {% csrf_token %}
+    <br />
+    {% if user.username == post.author.username and user.is_authenticated %}
+    <h3>Title:</h3>
+    <p>{{ form.title }} {{ form.title.errors }}</p>
+    <h3>Body:</h3>
+    <p>{{ form.body }} {{ form.body.errors }}</p>
+    <h3>Tag:</h3>
+    <p>{{ form.tag }} {{ form.tag.errors }}</p>
+    <input class="buttonclass" type="submit" value="Update" />
+    {% else %}
+    <p>You are not logged in, or you do not own this post</p>
+    {% endif %}
+  </form>
+</div>
+
 {% endblock content %}

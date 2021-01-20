@@ -14,6 +14,7 @@
   {% if post.author.username == "KaijZenal" %}
   <h3>(Owner)</h3>
   {% endif %}
+  <p>{{ post }}</p>
   <p>Votes: {{ post.votes.count }}</p>
 </div>
 {% endfor %} {% endblock content %}

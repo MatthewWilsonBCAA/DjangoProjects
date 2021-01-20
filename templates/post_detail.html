@@ -26,9 +26,10 @@
     <p>You are not logged in, or you have already voted</p>
     {% endif %}
   </form>
+  <a href="{% url 'post_edit' post.pk %}">+ Edit Post</a>
+  <a href="{% url 'post_delete' post.pk %}">+ Delete Post</a>
 </div>
-<a href="{% url 'post_edit' post.pk %}">+ Edit Post</a>
-<a href="{% url 'post_delete' post.pk %}">+ Delete Post</a>
+
 {% for comment in post.comments.all %}
 <div class="post-entry">
   <h3>
@@ -47,4 +48,7 @@
 </div>
 
 {% endfor %}
-<a href="{{ request.path }}comment">+ New Comment</a>{% endblock content %}
+<div class="post-entry">
+  <a href="{{ request.path }}comment">+ New Comment</a>
+</div>
+{% endblock content %}

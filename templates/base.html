@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
+  <style>
+    body {
+      background-image: url("https://i.pinimg.com/originals/09/7e/0c/097e0c433638da0406899722cdaff9d0.png");
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+    }
+  </style>
   <head>
     <title>Base Forum</title>
     <meta charset="UTF-8" />
@@ -9,28 +17,30 @@
   </head>
   <body>
     <div>
-      <header>
-        <div class="nav-left">
+      <header class="post-entry">
+        <div>
           <h1>
             <a href="{% url 'home' %}?sortby=new">Base Camp Forum</a>
           </h1>
-          <h2>
-            <a href="{% url 'search' %}?q=">Search</a>
-          </h2>
         </div>
         {% if user.is_authenticated %}
-        <p>
-          Current User:
-          <a href="{% url 'user_profile' user.username %}"
-            >{{ user.username }}</a
-          >
-        </p>
+        <div class="post-entry">
+          <p>
+            Current User:
+            <a href="{% url 'user_profile' user.username %}"
+              >{{ user.username }}</a
+            >
+          </p>
+        </div>
+
         <div class="post-entry">
           <a href="{% url 'post_new' %}">New Post</a>
           <br />
           <a href="{% url 'logout' %}">Log Out</a>
           <br />
           <a href="{% url 'following' %}">Feed</a>
+          <br />
+          <a href="{% url 'search' %}?q=">Search</a>
         </div>
         {% else %}
         <div class="post-entry">
@@ -43,7 +53,7 @@
         {% endif %}
       </header>
       {% block content %} {% endblock content %}
-      <p>v0.5-d30</p>
+      <div class="post-entry"><p>v0.6-d31</p></div>
     </div>
   </body>
 </html>
