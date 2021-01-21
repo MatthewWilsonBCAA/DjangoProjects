@@ -156,6 +156,18 @@ class MakeCommentView(CreateView):
         return super().form_valid(form)
 
 
+class EditCommentView(UpdateView):
+    model = Comment
+    template_name = "comment_edit.html"
+    fields = ["comment"]
+
+
+class DeleteCommentView(DeleteView):
+    model = Comment
+    template_name = "comment_delete.html"
+    success_url = reverse_lazy("home")
+
+
 class BlogCreateView(CreateView):
     model = Post
     template_name = "post_new.html"

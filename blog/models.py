@@ -20,7 +20,7 @@ class Post(models.Model):
         if len(shortened) > 49:
             return shortened + " (click title to continue reading)"
         else:
-            return shortened + " (this is it)"
+            return shortened
 
     def get_absolute_url(self):
         return reverse("post_detail", args=[str(self.id)])
@@ -40,6 +40,22 @@ class Comment(models.Model):
 
     def get_absolute_url(self):
         return reverse("post_detail", args=[str(self.post.id)])
+
+
+# class NestedComment(models.Model):
+#     parent = models.ForeignKey(
+#         Comment,
+#         on_delete=models.CASCADE,
+#         related_name="nestedcomments",
+#     )
+#     comment = models.TextField()
+#     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+
+#     def __str__(self):
+#         return self.comment
+
+#     def get_absolute_url(self):
+#         return reverse("post_detail", args=[str(self.post.id)])
 
 
 class Vote(models.Model):
