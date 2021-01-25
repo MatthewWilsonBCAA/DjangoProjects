@@ -15,7 +15,8 @@
   <h3>(Owner)</h3>
   {% endif %}
   <p>{{ post.created }}</p>
-  <p>{{ post.body }}</p>
+  <div>{{ post_markdown|safe|escape }}</div>
+
   <p>Tag: {{ post.tag }}</p>
   <p>Votes: {{ post.votes.count }}</p>
 

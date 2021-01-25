@@ -4,7 +4,7 @@ from django.urls import reverse_lazy, resolve
 from django.db.models import Count, Q
 from .models import Post, Comment, Vote
 from accounts.models import CustomUser
-import datetime
+import datetime, markdown
 
 
 # Create your views here.
@@ -131,7 +131,7 @@ class BlogDetailView(DetailView):
             )
         else:
             context["user_has_voted"] = True
-
+        context["post_markdown"] = markdown.markdown(self.object.body)
         return context
 
 
