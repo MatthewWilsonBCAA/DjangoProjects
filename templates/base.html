@@ -41,6 +41,10 @@
           <a href="{% url 'following' %}">Feed</a>
           <br />
           <a href="{% url 'search' %}?q=">Search</a>
+          <br />
+          <a href="{% url 'password_change' %}?q=">Password Change</a>
+          <br />
+          <a href="{% url 'password_reset' %}?q=">Password Reset</a>
         </div>
         {% else %}
         <div class="post-entry">
@@ -53,7 +57,7 @@
         {% endif %}
       </header>
       {% block content %} {% endblock content %}
-      <div class="post-entry"><p>v0.7-d34</p></div>
+      <div class="post-entry"><p>v0.8-d35</p></div>
     </div>
   </body>
 </html>

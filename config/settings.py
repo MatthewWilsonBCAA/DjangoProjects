@@ -138,3 +138,13 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 LOGIN_REDIRECT_URL = "/?sortby=top"
 LOGOUT_REDIRECT_URL = "/?sortby=top"
 AUTH_USER_MODEL = "accounts.CustomUser"
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+DEFAULT_FROM_EMAIL = "mwilson21@basecampcodingacademy.org"
+EMAIL_HOST = "smtp.sendgrid.net"
+EMAIL_HOST_USER = "apikey"
+EMAIL_HOST_PASSWORD = (
+    "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"
+)
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
