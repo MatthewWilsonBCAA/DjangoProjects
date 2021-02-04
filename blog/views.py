@@ -1,5 +1,6 @@
 from django.views.generic import ListView, DetailView, View
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy, resolve
 from django.db.models import Count, Q
 from .models import Post, Comment, Vote
@@ -135,7 +136,7 @@ class BlogDetailView(DetailView):
         return context
 
 
-class MakeVoteView(CreateView):
+class MakeVoteView(LoginRequiredMixin, CreateView):
     model = Vote
     fields = []
 
@@ -145,7 +146,7 @@ class MakeVoteView(CreateView):
         return super().form_valid(form)
 
 
-class MakeCommentView(CreateView):
+class MakeCommentView(LoginRequiredMixin, CreateView):
     model = Comment
     template_name = "comment_new.html"
     fields = ["comment"]
@@ -156,19 +157,19 @@ class MakeCommentView(CreateView):
         return super().form_valid(form)
 
 
-class EditCommentView(UpdateView):
+class EditCommentView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Comment
     template_name = "comment_edit.html"
     fields = ["comment"]
 
 
-class DeleteCommentView(DeleteView):
+class DeleteCommentView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Comment
     template_name = "comment_delete.html"
     success_url = reverse_lazy("home")
 
 
-class BlogCreateView(CreateView):
+class BlogCreateView(LoginRequiredMixin, CreateView):
     model = Post
     template_name = "post_new.html"
     fields = ["title", "body", "tag"]
@@ -179,19 +180,19 @@ class BlogCreateView(CreateView):
         return super().form_valid(form)
 
 
-class BlogUpdateView(UpdateView):
+class BlogUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
     template_name = "post_edit.html"
     fields = ["title", "body", "tag"]
 
 
-class BlogDeleteView(DeleteView):
+class BlogDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post
     template_name = "post_delete.html"
     success_url = reverse_lazy("home")
 
 
-class UpdateBioView(UpdateView):
+class UpdateBioView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = CustomUser
     template_name = "bio_edit.html"
     fields = ["profile_picture_link", "bio"]
@@ -203,7 +204,7 @@ class UpdateBioView(UpdateView):
         return self.request.user
 
 
-class FollowUser(UpdateView):
+class FollowUser(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = CustomUser
     fields = []
     slug_field = "username"
