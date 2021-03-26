@@ -162,11 +162,17 @@ class EditCommentView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     template_name = "comment_edit.html"
     fields = ["comment"]
 
+    def test_func(self):
+        return self.get_object().author.id == self.request.user.id
+
 
 class DeleteCommentView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Comment
     template_name = "comment_delete.html"
     success_url = reverse_lazy("home")
+    
+    def test_func(self):
+        return self.get_object().author.id == self.request.user.id
 
 
 class BlogCreateView(LoginRequiredMixin, CreateView):
@@ -184,12 +190,16 @@ class BlogUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
     template_name = "post_edit.html"
     fields = ["title", "body", "tag"]
+    def test_func(self):
+        return self.get_object().author.id == self.request.user.id
 
 
 class BlogDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post
     template_name = "post_delete.html"
     success_url = reverse_lazy("home")
+    def test_func(self):
+        return self.get_object().author.id == self.request.user.id
 
 
 class UpdateBioView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
@@ -202,6 +212,8 @@ class UpdateBioView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     def get_object(self):
         return self.request.user
+    def test_func(self):
+        return self.get_object().id == self.request.user.id
 
 
 class FollowUser(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
@@ -221,3 +233,4 @@ class FollowUser(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         # cur_user.followers.add()
 
         return super().form_valid(form)
+        
